@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Fr7rhmYm+bgyBM6kbZQ6AhVVCm1s5wm3OsbTn9YqN6Ckkje2/fibVsYWucX3hc79iCgUm3zH9yjzDIowAARqWg==",
+  "dgSpecHash": "IFDkKlsKXPSb1a5eFK7S6ITodqeZiQ2AszULs3ZAu1GT/iUtCnHE1UJLXszDMPJ1MjhbVNtnC/4kGs82yqKLEQ==",
   "success": true,
-  "projectFilePath": "D:\\YandexDisk\\УЧЕБНАЯ РАБОТА\\4бак DevOps\\Практические работы\\1 Jenkins\\Calculator\\Calculator\\Calculator.csproj",
+  "projectFilePath": "D:\\YandexDisk\\Projects\\Calculator\\Calculator\\Calculator.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

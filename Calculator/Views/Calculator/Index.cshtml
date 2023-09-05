@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Simple Calculator";
+    ViewData["Title"] = "Простой калькулятор";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -14,10 +14,10 @@
         <option value="Divide">/</option>
     </select>
     <input type="text" name="num2" required />
-    <input type="submit" value="Calculate" />
+    <input type="submit" value="Расчет" />
 </form>
 
 @if (ViewBag.Result != null)
 {
-    <h3>Result: @ViewBag.Result</h3>
+    <h3>Результат: @ViewBag.Result</h3>
 }

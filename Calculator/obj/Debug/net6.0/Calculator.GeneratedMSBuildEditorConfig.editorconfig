@@ -9,33 +9,33 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Calculator
 build_property.RootNamespace = Calculator
-build_property.ProjectDir = D:\YandexDisk\УЧЕБНАЯ РАБОТА\4бак DevOps\Практические работы\1 Jenkins\Calculator\Calculator\
+build_property.ProjectDir = D:\YandexDisk\Projects\Calculator\Calculator\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\YandexDisk\УЧЕБНАЯ РАБОТА\4бак DevOps\Практические работы\1 Jenkins\Calculator\Calculator
+build_property.MSBuildProjectDirectory = D:\YandexDisk\Projects\Calculator\Calculator
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/YandexDisk/УЧЕБНАЯ РАБОТА/4бак DevOps/Практические работы/1 Jenkins/Calculator/Calculator/Views/Calculator/Index.cshtml]
+[D:/YandexDisk/Projects/Calculator/Calculator/Views/Calculator/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FsY3VsYXRvclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/YandexDisk/УЧЕБНАЯ РАБОТА/4бак DevOps/Практические работы/1 Jenkins/Calculator/Calculator/Views/Shared/Error.cshtml]
+[D:/YandexDisk/Projects/Calculator/Calculator/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/YandexDisk/УЧЕБНАЯ РАБОТА/4бак DevOps/Практические работы/1 Jenkins/Calculator/Calculator/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/YandexDisk/Projects/Calculator/Calculator/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/YandexDisk/УЧЕБНАЯ РАБОТА/4бак DevOps/Практические работы/1 Jenkins/Calculator/Calculator/Views/_ViewImports.cshtml]
+[D:/YandexDisk/Projects/Calculator/Calculator/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/YandexDisk/УЧЕБНАЯ РАБОТА/4бак DevOps/Практические работы/1 Jenkins/Calculator/Calculator/Views/_ViewStart.cshtml]
+[D:/YandexDisk/Projects/Calculator/Calculator/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/YandexDisk/УЧЕБНАЯ РАБОТА/4бак DevOps/Практические работы/1 Jenkins/Calculator/Calculator/Views/Shared/_Layout.cshtml]
+[D:/YandexDisk/Projects/Calculator/Calculator/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-i5kysbodk9
