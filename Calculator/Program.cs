@@ -1,7 +1,23 @@
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Calculator.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+IConfiguration config = new ConfigurationBuilder().AddEnvironmentVariables().Build();
+
+var mariadbCS = config.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<CalculatorContext>(options =>
+    {
+        options.UseMySql(mariadbCS, new MySqlServerVersion(new Version(10, 5, 15)));
+    });
+
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
