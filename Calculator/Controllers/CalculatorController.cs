@@ -10,7 +10,6 @@ namespace Calculator.Controllers
 
     public class CalculatorController : Controller
     {
-
         private CalculatorContext _context;
 
         public CalculatorController(CalculatorContext context)
@@ -48,14 +47,14 @@ namespace Calculator.Controllers
 
             DataInputVariant dataInputVariant = new DataInputVariant
             {
-                Operand_1 = num1,
-                Operand_2 = num2,
-                Type_operation = (Data.Operation)operation,
-                Result = result
+                Operand_1 = num1.ToString(),
+                Operand_2 = num2.ToString(),
+                Type_operation = operation.ToString(),
+                Result = result.ToString()
             };
 
-            _context.DataInputVariants.Add(dataInputVariant);
-            _context.SaveChanges();
+            //_context.DataInputVariants.Add(dataInputVariant);
+            //_context.SaveChanges();
 
             return View("Index");
         }

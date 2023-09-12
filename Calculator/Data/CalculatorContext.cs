@@ -1,14 +1,9 @@
-﻿using Calculator.Data;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Reflection.Emit;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Calculator.Data
 {
     public class CalculatorContext : DbContext
-    {
-        public DbSet<Calculation> Calculations { get; set; }
-
+    {       
         public DbSet<DataInputVariant> DataInputVariants { get; set; }
 
         public CalculatorContext(DbContextOptions<CalculatorContext> options) : base(options)
@@ -20,5 +15,4 @@ namespace Calculator.Data
             //OnModelCreating(modelBuilder);
         }
     }
-
 }
