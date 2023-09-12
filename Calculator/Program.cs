@@ -8,12 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-IConfigurationRoot configuration = new ConfigurationBuilder()
-            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-            .AddJsonFile("appsettings.json")
-            .Build();
+//IConfigurationRoot configuration = new ConfigurationBuilder()
+//            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+//            .AddJsonFile("appsettings.json")
+//            .Build();
 
-string mariadbCS = configuration.GetConnectionString("DefaultConnection");
+string mariadbCS = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<CalculatorContext>(options =>
     {

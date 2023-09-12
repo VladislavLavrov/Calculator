@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Calculator.Migrations
 {
-    public partial class minite : Migration
+    public partial class m_init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
