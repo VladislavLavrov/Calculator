@@ -2,7 +2,6 @@
 using Calculator.Models;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Calculator.Controllers
 {

@@ -1,17 +1,10 @@
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Calculator.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-//IConfigurationRoot configuration = new ConfigurationBuilder()
-//            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-//            .AddJsonFile("appsettings.json")
-//            .Build();
 
 string mariadbCS = builder.Configuration.GetConnectionString("DefaultConnection");
 
