@@ -1,7 +1,10 @@
 ﻿using Calculator.Data;
 using Calculator.Models;
+using Calculator.Services;
+using Confluent.Kafka;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace Calculator.Controllers
 {
@@ -10,10 +13,30 @@ namespace Calculator.Controllers
     public class CalculatorController : Controller
     {
         private CalculatorContext _context;
+        private readonly KafkaProducerService<Null, string> _producer;
 
-        public CalculatorController(CalculatorContext context)
+        public CalculatorController(CalculatorContext context, KafkaProducerService<Null, string> producer)
         {
             _context = context;
+            _producer = producer;
+        }
+
+        public async Task<IActionResult> AddMessage()
+        {
+            var data = new InputData { X = 5, Y = 10 };
+            var json = JsonSerializer.Serialize(data);
+
+            // Добавить сообщение в Kafka
+            await _producer.ProduceAsync("lavrov", new Message<Null, string> { Value = json });
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Callback(int z)
+        {
+            var i = 0;
+
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
