@@ -23,7 +23,6 @@ builder.Services.AddHostedService<KafkaConsumerService>();
 builder.Services.AddSingleton<KafkaProducerHandler>();
 builder.Services.AddSingleton<KafkaProducerService<Null, string>>();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

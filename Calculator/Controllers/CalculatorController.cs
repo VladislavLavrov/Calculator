@@ -21,16 +21,16 @@ namespace Calculator.Controllers
             _producer = producer;
         }
 
-        public async Task<IActionResult> AddMessage()
-        {
-            var data = new InputData { X = 5, Y = 10 };
-            var json = JsonSerializer.Serialize(data);
+        //public async Task<IActionResult> AddMessage()
+        //{
+        //    var data = new InputData { X = 5, Y = 10 };
+        //    var json = JsonSerializer.Serialize(data);
 
-            // Добавить сообщение в Kafka
-            await _producer.ProduceAsync("lavrov", new Message<Null, string> { Value = json });
+        //    // Добавить сообщение в Kafka
+        //    await _producer.ProduceAsync("lavrov", new Message<Null, string> { Value = json });
 
-            return RedirectToAction(nameof(Index));
-        }
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         public async Task<IActionResult> Callback(int z)
         {
