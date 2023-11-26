@@ -6,41 +6,54 @@ using System;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Calculator.Controllers;
+using Calculator.Data;
 
 namespace Calculator.Services
 {
+    using System;
+    using System.Text.Json;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Confluent.Kafka;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using System.Net.Http;
+
     public class KafkaConsumerService : BackgroundService
     {
         private readonly string _topic;
-
         private readonly IConsumer<Null, string> _kafkaConsumer;
-
         private readonly IServiceProvider _serviceProvider;
-
         private readonly IHttpClientFactory _clientFactory;
 
         public KafkaConsumerService(IConfiguration config, IServiceProvider serviceProvider, IHttpClientFactory clientFactory)
         {
+            // Конфигурирование настроек Kafka и инициализация компонентов
             var consumerConfig = new ConsumerConfig();
             config.GetSection("Kafka:ConsumerSettings").Bind(consumerConfig);
-
             _topic = config.GetValue<string>("Kafka:TopicName");
-
             _kafkaConsumer = new ConsumerBuilder<Null, string>(consumerConfig).Build();
             _serviceProvider = serviceProvider;
             _clientFactory = clientFactory;
         }
 
+        /// <summary>
+        /// Выполнение работы Kafka Consumer'а.
+        /// </summary>
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             return Task.Run(() => StartConsumerLoop(stoppingToken), stoppingToken);
         }
 
+        /// <summary>
+        /// Цикл обработки сообщений из Kafka.
+        /// </summary>
+        /// <param name="cancellationToken">Токен отмены операции.</param>
         private async Task StartConsumerLoop(CancellationToken cancellationToken)
         {
             _kafkaConsumer.Subscribe(_topic);
-
-            //var cr22 = _kafkaConsumer.Consume(cancellationToken);
 
             while (!cancellationToken.IsCancellationRequested)
             {
@@ -49,15 +62,15 @@ namespace Calculator.Services
                     var cr = _kafkaConsumer.Consume(cancellationToken);
                     var ip = cr.Message.Value;
 
-                    var inputData = JsonSerializer.Deserialize<InputData>(cr.Message.Value);
+                    var dataInputVariant = JsonSerializer.Deserialize<DataInputVariant>(cr.Message.Value);
 
-                    var z = inputData.X + inputData.Y;
+                    var result = dataInputVariant.Result;
 
                     var httpClient = _clientFactory.CreateClient();
 
-                    await httpClient.GetAsync($"http://localhost:5015/Calculator/Callback?z={z}");
+                    await httpClient.GetAsync($"http://localhost:5015/Calculator/Callback?result={result}");
 
-                    // Handle message...
+                    // Обработка сообщения...
                     Console.WriteLine($"Message key: {cr.Message.Key}, IP: {cr.Message.Value}");
                 }
                 catch (OperationCanceledException)
@@ -79,9 +92,12 @@ namespace Calculator.Services
             }
         }
 
+        /// <summary>
+        /// Очистка ресурсов Consumer'а при завершении работы сервиса.
+        /// </summary>
         public override void Dispose()
         {
-            _kafkaConsumer.Close(); // Commit offsets and leave the group cleanly.
+            _kafkaConsumer.Close(); // Фиксация оффсетов и корректное выход из группы.
             _kafkaConsumer.Dispose();
 
             base.Dispose();
