@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<Calculator.Data.DataInputVariant>
+@{
     ViewData["Title"] = "Простой калькулятор";
 }
 
@@ -18,8 +19,21 @@
     @* <p><a href="/Calculator/AddMessage" class="btn btn-primary">Добавить сообщение в Kafka</a></p> *@
 </form> 
 
-@if (ViewBag.Result != null)
-{
-    <h3>Результат: @ViewBag.Result</h3>       
-}
-
+<h5 class="h5 mt-4">Результаты операций</h5>
+<table class="table table-hover table-bordered">
+    <tr>
+        <th>Операнд 1</th>
+        <th>Операнд 2</th>
+        <th>Операция</th>
+        <th>Результат</th>
+    </tr>
+    @foreach(var operation in Model)
+    {
+        <tr>
+            <td>@operation.Operand_1</td>
+            <td>@operation.Operand_2</td>
+            <td>@EnumExtensions.GetDisplayName(operation.Type_operation)</td>
+            <td>@operation.Result</td>
+        </tr>
+    }
+</table>

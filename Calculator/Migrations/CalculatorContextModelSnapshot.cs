@@ -2,7 +2,6 @@
 using Calculator.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,10 +9,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Calculator.Migrations
 {
     [DbContext(typeof(CalculatorContext))]
-    [Migration("20230912144437_m_init")]
-    partial class m_init
+    partial class CalculatorContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,17 +24,17 @@ namespace Calculator.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Operand_1")
-                        .HasColumnType("varchar(128)");
+                    b.Property<double>("Operand_1")
+                        .HasColumnType("double");
 
-                    b.Property<string>("Operand_2")
-                        .HasColumnType("varchar(128)");
+                    b.Property<double>("Operand_2")
+                        .HasColumnType("double");
 
                     b.Property<string>("Result")
                         .HasColumnType("varchar(128)");
 
-                    b.Property<string>("Type_operation")
-                        .HasColumnType("varchar(128)");
+                    b.Property<int>("Type_operation")
+                        .HasColumnType("int");
 
                     b.HasKey("ID_DataInputVariant");
 

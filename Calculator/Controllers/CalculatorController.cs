@@ -3,14 +3,10 @@ using Calculator.Models;
 using Calculator.Services;
 using Confluent.Kafka;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Calculator.Controllers
 {
-    public enum Operation { Add, Subtract, Multiply, Divide }
-
     public class CalculatorController : Controller
     {
         private readonly CalculatorContext _context;
@@ -25,7 +21,12 @@ namespace Calculator.Controllers
         /// <summary>
         /// Отображение страницы Index.
         /// </summary>
-        public IActionResult Index() => View();
+        public IActionResult Index()
+        {
+            var data = _context.DataInputVariants.OrderByDescending(x => x.ID_DataInputVariant).ToList();
+
+            return View(data);
+        }
 
         /// <summary>
         /// Обработка запроса на вычисление.
@@ -37,11 +38,13 @@ namespace Calculator.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Calculate(double num1, double num2, Operation operation)
         {
-            // Выполнение математической операции
-            double result = CalculateOperation(num1, num2, operation);
-
-            // Сохранение данных и результата в базе данных
-            DataInputVariant dataInputVariant = SaveDataAndResult(num1, num2, operation, result);
+            // Подготовка объекта для расчета
+            var dataInputVariant = new DataInputVariant
+            {
+                Operand_1 = num1,
+                Operand_2 = num2,
+                Type_operation = operation,
+            };
 
             // Отправка данных в Kafka
             await SendDataToKafka(dataInputVariant);
@@ -50,23 +53,12 @@ namespace Calculator.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        /// <summary>
-        /// Выполнение математической операции.
-        /// </summary>
-        /// <param name="num1">Первый операнд.</param>
-        /// <param name="num2">Второй операнд.</param>
-        /// <param name="operation">Тип операции (сложение, вычитание, умножение, деление).</param>
-        /// <returns>Результат математической операции.</returns>
-        private double CalculateOperation(double num1, double num2, Operation operation)
+        public IActionResult Callback([FromBody] DataInputVariant inputData)
         {
-            return operation switch
-            {
-                Operation.Add => num1 + num2,
-                Operation.Subtract => num1 - num2,
-                Operation.Multiply => num1 * num2,
-                Operation.Divide => num1 / num2,
-                _ => throw new ArgumentOutOfRangeException(nameof(operation), "Invalid operation"),
-            };
+            // Сохранение данных и результата в базе данных
+            SaveDataAndResult(inputData);
+
+            return Ok();
         }
 
         /// <summary>
@@ -77,20 +69,12 @@ namespace Calculator.Controllers
         /// <param name="operation">Тип операции (сложение, вычитание, умножение, деление).</param>
         /// <param name="result">Результат математической операции.</param>
         /// <returns>Объект с данными и результатом.</returns>
-        private DataInputVariant SaveDataAndResult(double num1, double num2, Operation operation, double result)
+        private DataInputVariant SaveDataAndResult(DataInputVariant inputData)
         {
-            DataInputVariant dataInputVariant = new DataInputVariant
-            {
-                Operand_1 = num1.ToString(),
-                Operand_2 = num2.ToString(),
-                Type_operation = operation.ToString(),
-                Result = result.ToString()
-            };
-
-            _context.DataInputVariants.Add(dataInputVariant);
+            _context.DataInputVariants.Add(inputData);
             _context.SaveChanges();
 
-            return dataInputVariant;
+            return inputData;
         }
 
         /// <summary>

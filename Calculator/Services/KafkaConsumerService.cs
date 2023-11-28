@@ -62,16 +62,19 @@ namespace Calculator.Services
                     var cr = _kafkaConsumer.Consume(cancellationToken);
                     var ip = cr.Message.Value;
 
-                    var dataInputVariant = JsonSerializer.Deserialize<DataInputVariant>(cr.Message.Value);
+                    // Исходные данные
+                    var inputData = JsonSerializer.Deserialize<DataInputVariant>(cr.Message.Value);
 
-                    var result = dataInputVariant.Result;
+                    // Выполнение расчета
+                    var result = CalculatorLibrary.CalculateOperation(inputData.Operand_1, inputData.Operand_2, inputData.Type_operation);
+                    inputData.Result = result.ToString();
 
                     var httpClient = _clientFactory.CreateClient();
 
-                    await httpClient.GetAsync($"http://localhost:5015/Calculator/Callback?result={result}");
+                    await httpClient.PostAsJsonAsync($"http://localhost:5015/Calculator/Callback", inputData);
 
                     // Обработка сообщения...
-                    Console.WriteLine($"Message key: {cr.Message.Key}, IP: {cr.Message.Value}");
+                    Console.WriteLine($"Message key: {cr.Message.Key}, value: {cr.Message.Value}");
                 }
                 catch (OperationCanceledException)
                 {
