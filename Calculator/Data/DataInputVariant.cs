@@ -19,5 +19,4 @@ namespace Calculator.Data
         [Column(TypeName = "varchar(128)")]
         public string? Result { get; set; } // Результат выполнения операции
     }
-
 }
