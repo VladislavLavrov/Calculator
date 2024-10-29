@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
 namespace Calculator.Data
-{   
+{
     public class DataInputVariant
     {
         [Key]
@@ -19,6 +19,6 @@ namespace Calculator.Data
         public string? Type_operation { get; set; }
 
         [Column(TypeName = "varchar(128)")]
-        public string? Result { get; set; }        
+        public string? Result { get; set; }
     }
 }
