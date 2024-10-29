@@ -49,9 +49,9 @@ namespace Calculator.Controllers
             dataInputVariant.Operand_2 = num2.ToString();
             dataInputVariant.Type_operation = operation.ToString();
             dataInputVariant.Result = result.ToString();
-            
-            //_context.DataInputVariants.Add(dataInputVariant);
-            //_context.SaveChanges();
+
+            _context.DataInputVariants.Add(dataInputVariant);
+            _context.SaveChanges();
 
             return View("Index");
         }
