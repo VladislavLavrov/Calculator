@@ -71,8 +71,10 @@ namespace Calculator.Services
 
                     var httpClient = _clientFactory.CreateClient();
 
+                    // Заменить последние 2 цифры порта на порядковый номер из студенческого журнала.
+                    // Например, порт 5012 соответствует номеру 12
                     await httpClient.PostAsJsonAsync($"http://localhost:5015/Calculator/Callback", inputData);
-
+                    
                     // Обработка сообщения...
                     Console.WriteLine($"Message key: {cr.Message.Key}, value: {cr.Message.Value}");
                 }
