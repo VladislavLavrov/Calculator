@@ -12,7 +12,7 @@ namespace Calculator.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

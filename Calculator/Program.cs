@@ -9,9 +9,12 @@ builder.Services.AddControllersWithViews();
 string mariadbCS = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<CalculatorContext>(options =>
-    {
-        options.UseMySql(mariadbCS, new MySqlServerVersion(new Version(10, 5, 15)));
-    });
+{
+    options.UseMySql(
+    mariadbCS,
+    new MariaDbServerVersion(new Version(11, 2, 5))
+);
+});
 
 builder.Services.AddRazorPages();
 
